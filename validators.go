@@ -67,6 +67,22 @@ func VideoNote(ctx *ext.Context) bool {
 	return EffectiveMessage(ctx) && ctx.EffectiveMessage.VideoNote != nil
 }
 
+// Requires `EffectiveMessage` to be received from one of the provided users.
+func FromUsers(ctx *ext.Context, users ...int64) bool {
+	if !EffectiveMessage(ctx) {
+		return false
+	}
+
+	from := ctx.EffectiveMessage.From.Id
+	for _, user := range users {
+		if user == from {
+			return true
+		}
+	}
+
+	return false
+}
+
 // Requires `EffectiveMessage` in context to have `Audio` or `Voice`.
 func AnyAudio(ctx *ext.Context) bool {
 	return Audio(ctx) || Voice(ctx)
