@@ -20,6 +20,9 @@ func (c *Conversation) HandleUpdate(b *gotgbot.Bot, ctx *ext.Context) error {
 	}
 
 	channnel <- ctx
+	c.mu.Lock()
+	delete(c.channels, ctx.EffectiveChat.Id)
+	c.mu.Unlock()
 	return nil
 }
 
