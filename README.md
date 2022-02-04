@@ -1,6 +1,6 @@
 # gotgbot conversation
 
-A elegant conversation handler for gotgbot.
+An elegant conversation handler for gotgbot.
 
 ## Installation
 
